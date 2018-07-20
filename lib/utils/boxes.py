@@ -211,6 +211,9 @@ def bbox_transform_inv(boxes, gt_boxes, weights=(1.0, 1.0, 1.0, 1.0)):
     """
     ex_widths = boxes[:, 2] - boxes[:, 0] + 1.0
     ex_heights = boxes[:, 3] - boxes[:, 1] + 1.0
+    # replace zeros with very small values
+    ex_widths[ex_widths == 0] = cfg.EPS
+    ex_heights[ex_heights == 0] = cfg.EPS
     ex_ctr_x = boxes[:, 0] + 0.5 * ex_widths
     ex_ctr_y = boxes[:, 1] + 0.5 * ex_heights
 
@@ -222,8 +225,8 @@ def bbox_transform_inv(boxes, gt_boxes, weights=(1.0, 1.0, 1.0, 1.0)):
     wx, wy, ww, wh = weights
     targets_dx = wx * (gt_ctr_x - ex_ctr_x) / ex_widths
     targets_dy = wy * (gt_ctr_y - ex_ctr_y) / ex_heights
-    targets_dw = ww * np.log(gt_widths / ex_widths)
-    targets_dh = wh * np.log(gt_heights / ex_heights)
+    targets_dw = ww * np.log(np.maximum(gt_widths / ex_widths, cfg.EPS))
+    targets_dh = wh * np.log(np.maximum(gt_heights / ex_heights, cfg.EPS))
 
     targets = np.vstack((targets_dx, targets_dy, targets_dw,
                          targets_dh)).transpose()

@@ -424,6 +424,9 @@ def main():
                 net_outputs = maskRCNN(**input_data)
                 training_stats.UpdateIterStats(net_outputs, inner_iter)
                 loss = net_outputs['total_loss']
+                if torch.isnan(loss):
+                    logger.info('NaN loss found! Skipping the current step ...')
+                    break
                 loss.backward()
             optimizer.step()
             training_stats.IterToc()
