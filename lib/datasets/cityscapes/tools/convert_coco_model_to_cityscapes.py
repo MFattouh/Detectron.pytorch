@@ -3,7 +3,7 @@
 #
 # cityscapes_to_coco
 
-from __future__ import absolute_import
+# from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -14,7 +14,8 @@ import os
 import sys
 import numpy as np
 
-import datasets.cityscapes.coco_to_cityscapes_id as cs
+sys.path.append(os.path.normpath(os.path.join(os.path.dirname( __file__ ) ,'..')))
+import coco_to_cityscapes_id as cs
 
 NUM_CS_CLS = 9
 NUM_COCO_CLS = 81
@@ -46,11 +47,15 @@ def parse_args():
 
 def convert_coco_blobs_to_cityscape_blobs(model_dict):
     for k, v in model_dict['blobs'].items():
+        if type(v) == str:
+            continue
+        if not v.shape:
+            continue
         if v.shape[0] == NUM_COCO_CLS or v.shape[0] == 4 * NUM_COCO_CLS:
             coco_blob = model_dict['blobs'][k]
             print(
                 'Converting COCO blob {} with shape {}'.
-                format(k, coco_blob.shape)
+                    format(k, coco_blob.shape)
             )
             cs_blob = convert_coco_blob_to_cityscapes_blob(
                 coco_blob, args.convert_func
