@@ -162,6 +162,14 @@ def main():
     elif args.dataset == "keypoints_coco2017":
         cfg.TRAIN.DATASETS = ('keypoints_coco_2017_train',)
         cfg.MODEL.NUM_CLASSES = 2
+    elif args.dataset == "cityscapes":
+        cfg.TRAIN.DATASETS = ('cityscapes_fine_instanceonly_seg_train')
+        cfg.MODEL.NUM_CLASSES = 9
+    elif args.dataset == "custom":
+        cfg.TRAIN.DATASETS = ('cityscapes_fine_instanceonly_seg_train', 'apolloscapes_road01', 'apolloscapes_road02')
+        cfg.MODEL.NUM_CLASSES = 9
+        # we will use a pre-trained weights on CoCo
+        cfg.MODEL.LOAD_IMAGENET_PRETRAINED_WEIGHTS = False
     else:
         raise ValueError("Unexpected args.dataset: {}".format(args.dataset))
 
