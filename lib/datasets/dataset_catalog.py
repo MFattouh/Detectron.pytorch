@@ -40,28 +40,55 @@ RAW_DIR = 'raw_dir'
 DATASETS = {
     'cityscapes_fine_instanceonly_seg_train': {
         IM_DIR:
-            _DATA_DIR + '/cityscapes/images',
+            _DATA_DIR + '/cityscapes/leftImg8bit/train',
         ANN_FN:
-            _DATA_DIR + '/cityscapes/annotations/instancesonly_gtFine_train.json',
+            _DATA_DIR + '/cityscapes/gtFine/train/coco_annotations.json',
         RAW_DIR:
-            _DATA_DIR + '/cityscapes/raw'
+            _DATA_DIR + '/cityscapes'
     },
     'cityscapes_fine_instanceonly_seg_val': {
         IM_DIR:
-            _DATA_DIR + '/cityscapes/images',
-        # use filtered validation as there is an issue converting contours
+            _DATA_DIR + '/cityscapes/leftImg8bit/val',
         ANN_FN:
-            _DATA_DIR + '/cityscapes/annotations/instancesonly_filtered_gtFine_val.json',
+            _DATA_DIR + '/cityscapes/gtFine/val/coco_annotations.json',
         RAW_DIR:
-            _DATA_DIR + '/cityscapes/raw'
+            _DATA_DIR + '/cityscapes'
     },
     'cityscapes_fine_instanceonly_seg_test': {
         IM_DIR:
-            _DATA_DIR + '/cityscapes/images',
+            _DATA_DIR + '/cityscapes/leftImg8bit/test',
         ANN_FN:
-            _DATA_DIR + '/cityscapes/annotations/instancesonly_gtFine_test.json',
+            _DATA_DIR + '/cityscapes/gtFine/test/coco_annotations.json',
         RAW_DIR:
-            _DATA_DIR + '/cityscapes/raw'
+            _DATA_DIR + '/cityscapes'
+    },
+    'apolloscapes_road01': {
+        IM_DIR:
+            _DATA_DIR + '/apollo/road01_ins/ColorImage',
+
+        ANN_FN:
+            _DATA_DIR + '/apollo/road01_ins/Label/coco_annotations.json'
+    },
+    'apolloscapes_road02': {
+        IM_DIR:
+            _DATA_DIR + '/apollo/road02_ins/ColorImage',
+
+        ANN_FN:
+            _DATA_DIR + '/apollo/road02_ins/Label/coco_annotations.json'
+    },
+    'apolloscapes_road03': {
+        IM_DIR:
+            _DATA_DIR + '/apollo/road03_ins/ColorImage',
+
+        ANN_FN:
+            _DATA_DIR + '/apollo/road03_ins/Label/coco_annotations.json'
+    },
+    'apolloscapes_road04': {
+        IM_DIR:
+            _DATA_DIR + '/apollo/road04_ins/ColorImage',
+
+        ANN_FN:
+            _DATA_DIR + '/apollo/road04_ins/Label/coco_annotations.json'
     },
     'coco_2014_train': {
         IM_DIR:
