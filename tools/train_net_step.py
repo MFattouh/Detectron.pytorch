@@ -8,6 +8,7 @@ import resource
 import traceback
 import logging
 from collections import defaultdict
+import random
 
 import numpy as np
 import yaml
@@ -37,6 +38,11 @@ logging.getLogger('roi_data.loader').setLevel(logging.INFO)
 # RuntimeError: received 0 items of ancdata. Issue: pytorch/pytorch#973
 rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
 resource.setrlimit(resource.RLIMIT_NOFILE, (4096, rlimit[1]))
+
+torch.manual_seed(cfg.RNG_SEED)
+np.random.seed(cfg.RNG_SEED)
+random.seed(cfg.RNG_SEED)
+
 
 def parse_args():
     """Parse input arguments"""
