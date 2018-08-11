@@ -35,6 +35,21 @@
 # INFO roidb.py: 220: 8         truck: 828
 
 
+def custom_cityscapes_to_coco(cityscapes_id):
+    lookup = {
+        0: 0,  # ... background
+        8: 2,  # bicycle
+        3: 3,  # car
+        1: 1,  # person
+        6: 7,  # train
+        4: 8,  # truck
+        7: 4,  # motorcycle
+        5: 6,  # bus
+        2: -1,  # rider (-1 means rand init)
+    }
+    return lookup[cityscapes_id]
+
+
 def cityscapes_to_coco(cityscapes_id):
     lookup = {
         0: 0,  # ... background
