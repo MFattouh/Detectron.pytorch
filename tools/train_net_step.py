@@ -440,7 +440,10 @@ def main():
                 loss = net_outputs['total_loss']
                 if torch.isnan(loss):
                     logger.info('NaN loss found! Skipping the current step ...')
+                    del input_data, net_outputs, loss
+                    torch.cuda.empty_cache()
                     break
+
                 loss.backward()
             optimizer.step()
             training_stats.IterToc()
